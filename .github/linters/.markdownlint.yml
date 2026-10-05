@@ -1,0 +1,8 @@
+# Relaxed rules for prose-heavy specification and research documents.
+MD013: false # line length
+MD024:
+  siblings_only: true # repeated headings under different parents
+MD033: false # inline HTML
+MD041: false # first line must be a top-level heading
+MD040: false # fenced code language
+MD060: false # table column style
