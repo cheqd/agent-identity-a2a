@@ -29,7 +29,7 @@ is the evidence trail.
 
 | Extension | URI (this draft) | Owns |
 |---|---|---|
-| Request/response proof | `https://kya-os.org/a2a/ext/proof/v1` | Binding the DIF TAAWG `org.kya-os/proof.v1` holder-of-key profile to A2A's `SendMessage`/`SendStreamingMessage` envelope ([§4](#4-request-response-proof-extension)) |
+| Request/response proof | `https://kya-os.org/a2a/ext/proof/v1` | Binding the DIF TAAWG `org.kya-os/proof.v1` holder-of-key profile to A2A's `SendMessage`/`SendStreamingMessage` envelope ([§4](#4-requestresponse-proof-extension)) |
 | cheqd trust extension | `https://cheqd.io/a2a/ext/trust/v1` | Reciprocal `alsoKnownAs` linkage, DID-Linked Resource manifest resolution, and credential status, scoped to a caller already verified by §4 ([§5](#5-cheqd-trust-extension)) |
 
 They compose but neither requires the other: a deployment can activate the proof extension alone
@@ -193,13 +193,13 @@ On receiving a `SendMessage`/`SendStreamingMessage` request, the verifying `user
 
 The enforcing wrapper then:
 
-11. Rejects (fails closed) any request whose `userBuilder` did not return a verified identity —
-    whether because the proof was missing, invalid, or no `userBuilder` was installed at all. A
-    missing `userBuilder` **MUST** fail exactly like a missing proof, by design, not by accident of
-    configuration.
-12. Runs the inner handler only for a verified, (if applicable) trust-extension-passing caller.
-13. For `SendMessage` only, attaches the response proof ([§3](#3-the-response-proof)) over the
-    handler's final result before returning it.
+1. Rejects (fails closed) any request whose `userBuilder` did not return a verified identity —
+   whether because the proof was missing, invalid, or no `userBuilder` was installed at all. A
+   missing `userBuilder` **MUST** fail exactly like a missing proof, by design, not by accident of
+   configuration.
+2. Runs the inner handler only for a verified, (if applicable) trust-extension-passing caller.
+3. For `SendMessage` only, attaches the response proof ([§3](#3-the-response-proof)) over the
+   handler's final result before returning it.
 
 ### 4.7 Agent Card discovery
 
@@ -220,7 +220,7 @@ on Agent Card signature verification, carried over from the implementation's fin
 ## 5. cheqd trust extension
 
 Activation URI: `https://cheqd.io/a2a/ext/trust/v1` (see the URI note in [§1](#1-two-independent-extensions)).
-Optional per Agent Card — a deployment may activate the proof extension ([§4](#4-request-response-proof-extension))
+Optional per Agent Card — a deployment may activate the proof extension ([§4](#4-requestresponse-proof-extension))
 without this one.
 
 ### 5.1 Activation parameters
@@ -236,7 +236,7 @@ checks, each individually optional:
 
 ### 5.2 Per-DID checks
 
-For a caller already verified by [§4](#4-request-response-proof-extension), with this extension
+For a caller already verified by [§4](#4-requestresponse-proof-extension), with this extension
 activated:
 
 - If `anchoredDid` is set: resolve both the caller's canonical DID document and the claimed
